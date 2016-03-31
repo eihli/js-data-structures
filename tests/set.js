@@ -25,4 +25,10 @@ describe('set', function() {
       mySet.length.should.equal(length + 1);
     });
   });
+
+  describe('indexOf', function() {
+    it('should return a number', function() {
+      mySet.indexOf().should.be.a('number');
+    });
+  });
 });
