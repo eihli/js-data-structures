@@ -6,7 +6,11 @@ describe('Hash Table', function() {
     myHash = new HashTable();
   });
 
-  it('should have an add function', function() {
+  it('should have an add method', function() {
     myHash.add.should.be.a('function');
+  });
+
+  it('should have a size method', function() {
+    myHash.size().should.be.a('number');
   });
 });
