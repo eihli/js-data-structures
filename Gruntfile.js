@@ -1,12 +1,12 @@
 module.exports = function (grunt) {
 
   grunt.initConfig({
-    
+
     pkg: grunt.file.readJSON('package.json'),
 
     jshint: {
       // This is the list of files on which grunt will run JSHint
-      all: ['Gruntfile.js', 'package.json', 'src/*.js', '*.js'],
+      all: ['Gruntfile.js', 'package.json', 'src/*.js', 'tests/*.js', '*.js'],
       options: {
         curly: true,
         eqeqeq: true,
