@@ -9,4 +9,8 @@ describe('set', function() {
   it('should exist', function() {
     mySet.should.be.an.instanceof(Set);
   });
+
+  it('should have a length', function() {
+    mySet.length.should.be.a('number');
+  });
 });
