@@ -43,5 +43,10 @@ describe('set', function() {
     it('should return false on empty set', function() {
       should.equal(mySet.contains(), false);
     });
+
+    it('should return true if element is in set', function() {
+      mySet.add('foo');
+      mySet.contains('foo').should.be.true;
+    })
   });
 });

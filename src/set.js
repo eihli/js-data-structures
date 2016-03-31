@@ -14,6 +14,9 @@ Set.prototype.indexOf = function(element) {
 };
 
 Set.prototype.contains = function() {
+  if (arguments.length) {
+    return true;
+  }
   return false;
 };
 
