@@ -13,4 +13,16 @@ describe('set', function() {
   it('should have a length', function() {
     mySet.length.should.be.a('number');
   });
+
+  describe('add', function() {
+    var length;
+    beforeEach(function() {
+      length = mySet.length;
+      mySet.add();
+    });
+
+    it('should increment length', function() {
+      mySet.length.should.equal(length + 1);
+    });
+  });
 });
