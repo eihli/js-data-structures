@@ -28,7 +28,13 @@ describe('set', function() {
 
   describe('indexOf', function() {
     it('should return a number', function() {
-      mySet.indexOf().should.be.a('number');
+      mySet.indexOf('foo').should.be.a('number');
+    });
+
+    it('should require an argument', function() {
+      (function() {
+        mySet.indexOf()
+      }).should.throw('indexOf requires an argument');
     });
   });
 });
