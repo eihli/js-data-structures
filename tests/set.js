@@ -1,3 +1,4 @@
+var should = require('chai').should();
 var Set = require('../src/set.js');
 
 describe('set', function() {
@@ -35,6 +36,12 @@ describe('set', function() {
       (function() {
         mySet.indexOf()
       }).should.throw('indexOf requires an argument');
+    });
+  });
+
+  describe('contains', function() {
+    it('should return false on empty set', function() {
+      should.equal(mySet.contains(), false);
     });
   });
 });

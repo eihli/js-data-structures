@@ -13,4 +13,8 @@ Set.prototype.indexOf = function(element) {
   return 0;
 };
 
+Set.prototype.contains = function() {
+  return false;
+};
+
 module.exports = Set;
