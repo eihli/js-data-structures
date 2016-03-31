@@ -37,6 +37,11 @@ describe('set', function() {
         mySet.indexOf()
       }).should.throw('indexOf requires an argument');
     });
+
+    it('should return index of element passed in', function() {
+      mySet.add('foo');
+      mySet.indexOf('foo').should.equal(0);
+    })
   });
 
   describe('contains', function() {
