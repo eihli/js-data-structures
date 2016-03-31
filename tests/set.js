@@ -41,7 +41,11 @@ describe('set', function() {
     it('should return index of element passed in', function() {
       mySet.add('foo');
       mySet.indexOf('foo').should.equal(0);
-    })
+    });
+
+    it('should return less than 0 if element is not in list', function() {
+      mySet.indexOf('bar').should.equal(-1);
+    });
   });
 
   describe('contains', function() {
@@ -52,6 +56,10 @@ describe('set', function() {
     it('should return true if element is in set', function() {
       mySet.add('foo');
       mySet.contains('foo').should.be.true;
-    })
+    });
+
+    it('should return false if an element is not in the set', function() {
+      mySet.contains('foo').should.be.false;
+    });
   });
 });
