@@ -15,8 +15,8 @@ describe('skel', function() {
     // is not an object, it doesn't get that property.
     should.equal(skel.helperFunctionToCapitalizeAString, undefined);
   });
-  
+
   it('should be able to return capitized name', function() {
     skel.getCapitalizedName().should.equal('SKEL');
-  })
+  });
 });
