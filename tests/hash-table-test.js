@@ -1,4 +1,4 @@
-var should = require('chai').should();
+var expect = require('chai').expect;
 var HashTable = require('../src/hash-table.js');
 
 describe('Hash Table', function() {
@@ -8,32 +8,39 @@ describe('Hash Table', function() {
 
   describe('add', function() {
     it('should have an add method', function() {
-      myHash.add.should.be.a('function');
+      expect(myHash.add).to.be.a('function');
     });
 
     it('should increase size', function() {
       oldSize = myHash.size();
       myHash.add();
-      myHash.size().should.equal(oldSize + 1);
+      expect(myHash.size()).to.equal(oldSize + 1);
     });
   });
 
   describe('get', function() {
     it('should have a get method', function() {
-      myHash.get.should.be.a('function');
+      expect(myHash.get).to.be.a('function');
     });
 
     it('should return the value of the key passed in', function() {
       myHash.add('eric', 'engineer');
-      myHash.get('eric').should.equal('engineer');
+      expect(myHash.get('eric')).to.equal('engineer');
     });
 
     it('should return undefined if key is not in hash', function() {
-      should.not.exist(myHash.get('eric'));
+      expect(myHash.get('eric')).to.not.exist;
+    });
+  });
+
+  describe('remove', function() {
+    it('should remove key value pair from hash', function() {
+      myHash.add('eric', 'engineer');
+      expect(myHash.get('eric')).to.exist;
     });
   });
 
   it('should have a size method', function() {
-    myHash.size().should.be.a('number');
+    expect(myHash.size()).to.be.a('number');
   });
 });
