@@ -34,5 +34,18 @@ module.exports = (function() {
     return undefined;
   }
 
+  function hash(key, size) {
+    var k = keyToInt(key);
+    return (k * (k + 3.0)) % size;
+  }
+
+  function keyToInt(key) {
+    var value = 0;
+    for (var i = 0; i < key.length; i++) {
+      value += key.charCodeAt(i);
+    }
+    return value;
+  }
+
   return HashTable;
 })();
