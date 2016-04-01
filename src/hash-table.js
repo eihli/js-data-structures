@@ -2,6 +2,7 @@ module.exports = (function() {
   function HashTable() {
     this._storage = [];
     this._numUsedBuckets = 0;
+    this._size = 0;
   }
 
   HashTable.prototype.add = function(key, value) {
@@ -14,6 +15,7 @@ module.exports = (function() {
       this._numUsedBuckets += 1;
     }
     bucket.push([key, value]);
+    this._size++;
     this._storage[indexOfBucket] = bucket;
   };
 
@@ -27,6 +29,7 @@ module.exports = (function() {
         newBucket.push(oldBucket[i]);
       } else {
         removed = true;
+        this._size -= 1;
       }
     }
     this._storage[indexOfBucket] = newBucket;
@@ -41,7 +44,7 @@ module.exports = (function() {
   };
 
   HashTable.prototype.size = function() {
-    return this._storage.length;
+    return this._size;
   };
 
   HashTable.prototype.resize = function() {
@@ -53,7 +56,7 @@ module.exports = (function() {
   };
 
   function getValueAt(key) {
-    var indexOfBucket = hash(key, this.size());
+    var indexOfBucket = hash(key, this._storage.length);
     var bucket = this._storage[indexOfBucket] || [];
     for (var i = 0; i < bucket.length; i++) {
       if (bucket[i][0] === key) {
