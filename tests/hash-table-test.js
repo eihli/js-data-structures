@@ -1,4 +1,5 @@
 var expect = require('chai').expect;
+var sinon = require('sinon');
 var HashTable = require('../src/hash-table.js');
 
 describe('Hash Table', function() {
@@ -36,7 +37,13 @@ describe('Hash Table', function() {
     });
   });
 
-  it('should have a size method', function() {
-    expect(myHash.size()).to.be.a('number');
+  describe('resizing', function() {
+    it('should resize when >= 3/4 of the buckets are used', function() {
+      var myHash = new HashTable(4);
+      var resizeSpy = sinon.spy(myHash, 'resize');
+      myHash.capacity = sinon.stub().returns(.75);
+      myHash.add('eric', 'engineer');
+      expect(resizeSpy.called).to.be.true;
+    });
   });
 });
