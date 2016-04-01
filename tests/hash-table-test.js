@@ -23,8 +23,9 @@ describe('Hash Table', function() {
       myHash.get.should.be.a('function');
     });
 
-    xit('should return the value of the key passed in', function() {
-
+    it('should return the value of the key passed in', function() {
+      myHash.add('eric', 'engineer');
+      myHash.get('eric').should.equal('engineer');
     });
   });
 
