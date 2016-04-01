@@ -27,6 +27,10 @@ describe('Hash Table', function() {
       myHash.add('eric', 'engineer');
       myHash.get('eric').should.equal('engineer');
     });
+
+    it('should return undefined if key is not in hash', function() {
+      should.not.exist(myHash.get('eric'));
+    });
   });
 
   it('should have a size method', function() {
