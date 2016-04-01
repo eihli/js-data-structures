@@ -27,11 +27,19 @@ describe('Hash Table', function() {
   });
 
   describe('remove', function() {
-    it('should remove key value pair from hash', function() {
+    before(function() {
       myHash.add('eric', 'engineer');
+      expect(myHash.size()).to.equal(1);
       expect(myHash.get('eric')).to.equal('engineer');
       myHash.remove('eric');
+    });
+
+    it('should remove key value pair from hash', function() {
       expect(myHash.get('eric')).to.equal(undefined);
+    });
+
+    it('should decrease size', function() {
+      expect(myHash.size()).to.equal(0);
     });
   });
 
