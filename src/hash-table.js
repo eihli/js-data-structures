@@ -1,9 +1,9 @@
 function HashTable() {
-
+  this._storage = [];
 }
 
-HashTable.prototype.add = function() {
-
+HashTable.prototype.add = function(element) {
+  this._storage.push(element);
 };
 
 HashTable.prototype.get = function() {
@@ -11,7 +11,7 @@ HashTable.prototype.get = function() {
 };
 
 HashTable.prototype.size = function() {
-  return 0;
+  return this._storage.length;
 };
 
 module.exports = HashTable;
