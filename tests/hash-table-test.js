@@ -10,24 +10,26 @@ describe('Hash Table', function() {
   describe('add', function() {
     it('should increase size', function() {
       var oldLength = myHash.size();
-      myHash.add('eric');
+      myHash.add('eric', 'engineer');
       expect(myHash.size()).to.equal(oldLength + 1);
     });
   });
 
   describe('get', function() {
+    it('should return undefined if key is not in hash', function() {
+      expect(myHash.get('eric')).to.equal(undefined);
+    });
+
     it('should return the value of the key passed in', function() {
       myHash.add('eric', 'engineer');
       expect(myHash.get('eric')).to.equal('engineer');
     });
-
-    it('should return undefined if key is not in hash', function() {
-      expect(myHash.get('eric')).to.equal(undefined);
-    });
   });
 
   describe('remove', function() {
+    var myHash;
     before(function() {
+      myHash = new HashTable();
       myHash.add('eric', 'engineer');
       expect(myHash.size()).to.equal(1);
       expect(myHash.get('eric')).to.equal('engineer');
