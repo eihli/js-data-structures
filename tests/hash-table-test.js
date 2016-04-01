@@ -10,12 +10,6 @@ describe('Hash Table', function() {
     it('should have an add method', function() {
       expect(myHash.add).to.be.a('function');
     });
-
-    it('should increase size', function() {
-      oldSize = myHash.size();
-      myHash.add();
-      expect(myHash.size()).to.equal(oldSize + 1);
-    });
   });
 
   describe('get', function() {
