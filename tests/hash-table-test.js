@@ -8,10 +8,6 @@ describe('Hash Table', function() {
   });
 
   describe('add', function() {
-    it('should have an add method', function() {
-      expect(myHash.add).to.be.a('function');
-    });
-
     it('should increase size', function() {
       var oldLength = myHash.size();
       myHash.add('eric');
@@ -20,10 +16,6 @@ describe('Hash Table', function() {
   });
 
   describe('get', function() {
-    it('should have a get method', function() {
-      expect(myHash.get).to.be.a('function');
-    });
-
     it('should return the value of the key passed in', function() {
       myHash.add('eric', 'engineer');
       expect(myHash.get('eric')).to.equal('engineer');
