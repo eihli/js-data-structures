@@ -37,6 +37,8 @@ describe('Hash Table', function() {
     it('should remove key value pair from hash', function() {
       myHash.add('eric', 'engineer');
       expect(myHash.get('eric')).to.exist;
+      myHash.remove('eric');
+      expect(myHash.get('eric')).to.not.exist;
     });
   });
 

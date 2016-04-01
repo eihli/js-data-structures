@@ -7,6 +7,16 @@ module.exports = (function() {
     this._storage.push([key, value]);
   };
 
+  HashTable.prototype.remove = function(key) {
+    for (var i = 0; i < this.size(); i++) {
+      if (this._storage[i][0] === key) {
+        this._storage[i] = [];
+        return this._storage[i][1];
+      }
+    }
+    return false;
+  };
+
   HashTable.prototype.get = function(key) {
     return getValueAt.call(this, key);
   };
