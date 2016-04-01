@@ -12,7 +12,7 @@ describe('Hash Table', function() {
       var oldLength = myHash.size();
       myHash.add('eric');
       expect(myHash.size()).to.equal(oldLength + 1);
-    })
+    });
   });
 
   describe('get', function() {
@@ -22,16 +22,16 @@ describe('Hash Table', function() {
     });
 
     it('should return undefined if key is not in hash', function() {
-      expect(myHash.get('eric')).to.not.exist;
+      expect(myHash.get('eric')).to.equal(undefined);
     });
   });
 
   describe('remove', function() {
     it('should remove key value pair from hash', function() {
       myHash.add('eric', 'engineer');
-      expect(myHash.get('eric')).to.exist;
+      expect(myHash.get('eric')).to.equal('engineer');
       myHash.remove('eric');
-      expect(myHash.get('eric')).to.not.exist;
+      expect(myHash.get('eric')).to.equal(undefined);
     });
   });
 
@@ -39,9 +39,9 @@ describe('Hash Table', function() {
     it('should resize when >= 3/4 of the buckets are used', function() {
       var myHash = new HashTable(4);
       var resizeSpy = sinon.spy(myHash, 'resize');
-      myHash.capacity = sinon.stub().returns(.75);
+      myHash.capacity = sinon.stub().returns(0.75);
       myHash.add('eric', 'engineer');
-      expect(resizeSpy.called).to.be.true;
+      expect(resizeSpy.called).to.equal(true);
     });
   });
 });
