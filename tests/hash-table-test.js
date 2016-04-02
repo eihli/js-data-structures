@@ -1,4 +1,5 @@
 var should = require('chai').should();
+var expect = require('chai').expect;
 var HashTable = require('../src/hash-table.js');
 
 describe('Hash Table', function() {
@@ -23,6 +24,12 @@ describe('Hash Table', function() {
       oldSize = myHash.size();
       myHash.add('two', 2);
       myHash.size().should.equal(oldSize + 1);
+    });
+
+    it('should add key value pair to storage', function() {
+      myHash.add('one',1);
+      expect(myHash._storage[0][0]).to.equal('one');
+      expect(myHash._storage[0][1]).to.equal(1);
     });
   });
 
