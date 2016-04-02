@@ -1,6 +1,5 @@
-function HashTable(limit) {
+function HashTable() {
   this._storage = [];
-  this.limit = limit;
 }
 
 HashTable.prototype.add = function(key, value) {
@@ -26,8 +25,12 @@ HashTable.prototype.size = function() {
   return this._storage.length;
 };
 
-HashTable.prototype.hash = function(string) {
-  return string.length % this.limit;
+HashTable.prototype.hash = function(key, maxSize){
+  var total = 0;
+  for(var i = 0; i < key.length; i++){
+    total += key.charCodeAt(i);
+  }
+  return total % maxSize;
 };
 
 module.exports = HashTable;

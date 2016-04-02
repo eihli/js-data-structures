@@ -57,6 +57,18 @@ describe('Hash Table', function() {
     });
   });
 
+  describe('hash function', function() {
+    it('should return a index between 0 and maximum size', function() {
+      var string = '';
+      var maxSize = 4;
+      for (var i = 0; i < 5; i++) {
+        string += i;
+        myHash.hash(string, maxSize).should.be.gte(0)
+        myHash.hash(string, maxSize).should.be.lte(maxSize)
+      }
+    });
+  });
+
   describe('get', function() {
     it('should have a get method', function() {
       myHash.get.should.be.a('function');
