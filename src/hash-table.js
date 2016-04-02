@@ -3,7 +3,12 @@ function HashTable() {
 }
 
 HashTable.prototype.add = function(element) {
-  this._storage.push(element);
+  if(arguments.length === 2) {
+    this._storage.push(element);
+    return true;
+  } else {
+    return -1;
+  }
 };
 
 HashTable.prototype.get = function() {

@@ -11,9 +11,17 @@ describe('Hash Table', function() {
       myHash.add.should.be.a('function');
     });
 
+    it('should throw error if called with invalid arguments', function() {
+      myHash.add().should.equal(-1);
+    });
+
+    it('should not throw error if called with valid arguments', function(){
+      myHash.add('three', 3).should.equal(true);
+    });
+
     it('should increase size', function() {
       oldSize = myHash.size();
-      myHash.add();
+      myHash.add('two', 2);
       myHash.size().should.equal(oldSize + 1);
     });
   });
