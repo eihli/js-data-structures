@@ -26,10 +26,9 @@ describe('Hash Table', function() {
       myHash.size().should.equal(oldSize + 1);
     });
 
-    it('should add key value pair to storage', function() {
-      myHash.add('one',1);
-      expect(myHash._storage[0][0]).to.equal('one');
-      expect(myHash._storage[0][1]).to.equal(1);
+    it('should add the key value pair to storage', function() {
+      myHash.add('one', 1);
+      myHash._storage[0].should.deep.equal(['one', 1]);
     });
   });
 

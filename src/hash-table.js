@@ -4,7 +4,7 @@ function HashTable() {
 
 HashTable.prototype.add = function(key, value) {
   if(arguments.length === 2) {
-    this._storage.push([key,value]);
+    this._storage.push([key, value]);
     return true;
   } else {
     return -1;
