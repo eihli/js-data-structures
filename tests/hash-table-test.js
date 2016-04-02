@@ -4,7 +4,7 @@ var HashTable = require('../src/hash-table.js');
 
 describe('Hash Table', function() {
   beforeEach(function() {
-    myHash = new HashTable();
+    myHash = new HashTable(5);
   });
 
   describe('add', function() {
@@ -29,6 +29,31 @@ describe('Hash Table', function() {
     it('should add the key value pair to storage', function() {
       myHash.add('one', 1);
       myHash._storage[0].should.deep.equal(['one', 1]);
+    });
+
+    it('should overwrite value given the same key on add', function() {
+      myHash.add('one', 1);
+      myHash.add('one', 'one');
+      myHash._storage[0].should.deep.equal(['one', 'one']);
+    });
+  });
+
+  describe('hash', function() {
+    it('is a function', function() {
+      myHash.hash.should.be.a('function');
+    });
+
+    it('should return a number', function() {
+      myHash.hash('test').should.be.a('number');
+    });
+
+    it('should return anumber between 0 and limit', function() {
+      var str = '';
+      for (var i = 0; i < 10; i++) {
+        str += '1';
+        myHash.hash(str).should.be.gte(0);
+      }
+
     });
   });
 
