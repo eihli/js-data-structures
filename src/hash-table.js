@@ -1,13 +1,14 @@
 module.exports = (function() {
+  var Hash = require('./hash');
   function HashTable(numBuckets) {
     numBuckets = numBuckets || 2;
     this._storage = [];
     this._numUsedBuckets = 0;
     this._size = 0;
-    this.initialize(numBuckets);
+    initialize.call(this, numBuckets);
   }
 
-  HashTable.prototype.initialize = function(numBuckets) {
+  initialize = function(numBuckets) {
     for (var i = 0; i < numBuckets; i++) {
       this._storage.push([]);
     }
@@ -17,7 +18,7 @@ module.exports = (function() {
     if (this.capacity() >= 0.75) {
       this.resize();
     }
-    var indexOfBucket = hash(key, this.numBuckets());
+    var indexOfBucket = hash(key, numBuckets());
     var bucket = this._storage[indexOfBucket] || [];
     if (bucket.length === 0) {
       this._numUsedBuckets += 1;
@@ -51,7 +52,7 @@ module.exports = (function() {
     return getValueAt.call(this, key);
   };
 
-  HashTable.prototype.numBuckets = function() {
+  numBuckets = function() {
     return this._storage.length;
   };
 
@@ -59,16 +60,12 @@ module.exports = (function() {
     return this._size;
   };
 
-  HashTable.prototype.resize = function() {
-
-  };
-
   HashTable.prototype.capacity = function() {
     return 0.0 + this._numUsedBuckets / this.size();
   };
 
   function getValueAt(key) {
-    var indexOfBucket = hash(key, this.numBuckets());
+    var indexOfBucket = hash(key, numBuckets());
     var bucket = this._storage[indexOfBucket] || [];
     for (var i = 0; i < bucket.length; i++) {
       if (bucket[i][0] === key) {
@@ -79,16 +76,7 @@ module.exports = (function() {
   }
 
   function hash(key, size) {
-    var k = keyToInt(key);
-    return (k * (k + 3.0)) % size;
-  }
-
-  function keyToInt(key) {
-    var value = 0;
-    for (var i = 0; i < key.length; i++) {
-      value += key.charCodeAt(i);
-    }
-    return value;
+    Hash.getIndex(key, size);
   }
 
   return HashTable;
