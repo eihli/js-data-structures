@@ -7,7 +7,7 @@ xdescribe('Hash Table', function() {
     myHash = new HashTable();
   });
 
-  xdescribe('public methods', function() {
+  describe('public methods', function() {
     it('should only have add, remove, get, and size public methods', function() {
       expect(Object.keys(myHash.constructor.prototype)).to.deep.equal(
         ['add', 'remove', 'get', 'size']

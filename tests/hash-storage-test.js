@@ -12,28 +12,17 @@ describe('HashStorage', function() {
     it('can be initialized with a certain size', function() {
       expect(storage.size()).to.equal(1);
     });
-
-    it('initializes length to 0', function() {
-      expect(storage.length()).to.equal(0);
-    });
   });
 
   describe('push', function() {
-    it('increases length', function() {
-      storage.push(0, 'key', 'value');
+    it('returns null if given index above size', function() {
+      expect(storage.push(1, 'key', 'value')).to.equal(null);
     });
 
-    it('does not increase length if length would grow above size', function() {
-      storage.push(0, 'key', 'value');
-      storage.push(0, 'key', 'value');
-      expect(storage.length()).to.equal(1);
-    });
-
-    it('does not increase length if pushing duplicate index/key', function() {
+    it('returns null if pushing duplicate index/key', function() {
       storage = new HashStorage(2);
       storage.push(0, 'key', 'value');
-      storage.push(0, 'key', 'value');
-      expect(storage.length()).to.equal(1);
+      expect(storage.push(0, 'key', 'value')).to.equal(null);
     });
   });
 

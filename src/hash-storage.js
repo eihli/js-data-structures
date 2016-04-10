@@ -2,7 +2,6 @@ var HashItem = require('./hash-item');
 // push, get, init with size, can't push over size
 module.exports = function(size) {
   storage = [];
-  length = 0;
 
   function Storage() {
     for (var i = 0; i < size; i++) {
@@ -14,22 +13,17 @@ module.exports = function(size) {
     return size;
   };
 
-  Storage.prototype.length = function() {
-    return length;
-  };
-
   Storage.prototype.push = function(index, key, value) {
-    if (length === this.size()) {
-      return;
+    if (index >= size) {
+      return null;
     }
     var bucket = storage[index];
     for (var i = 0; i < bucket.length; i++) {
       if (bucket[i].key() === key) {
         bucket[i] = new HashItem(key, value);
-        return;
+        return null;
       }
     }
-    length++;
     bucket.push(new HashItem(key, value));
   };
 
