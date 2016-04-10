@@ -2,12 +2,12 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 var HashTable = require('../src/hash-table.js');
 
-describe('Hash Table', function() {
+xdescribe('Hash Table', function() {
   beforeEach(function() {
     myHash = new HashTable();
   });
 
-  describe('public methods', function() {
+  xdescribe('public methods', function() {
     it('should only have add, remove, get, and size public methods', function() {
       expect(Object.keys(myHash.constructor.prototype)).to.deep.equal(
         ['add', 'remove', 'get', 'size']
