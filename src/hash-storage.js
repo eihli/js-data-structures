@@ -1,4 +1,5 @@
 var HashItem = require('./hash-item');
+var HashBucket = require('./hash-bucket');
 // add, get, init with size, can't push over size
 module.exports = function(size) {
   var storage, numBucketsUsed;
@@ -8,7 +9,7 @@ module.exports = function(size) {
     storage = [];
     numBucketsUsed = 0;
     for (var i = 0; i < size; i++) {
-      storage.push([]);
+      storage.push(new HashBucket());
     }
   }
 
@@ -21,30 +22,32 @@ module.exports = function(size) {
       return null;
     }
     var bucket = storage[index];
-    if (bucket.length === 0) {
+    if (bucket.size() === 0) {
       numBucketsUsed++;
     }
-    for (var i = 0; i < bucket.length; i++) {
-      if (bucket[i].key() === key) {
-        bucket[i] = new HashItem(key, value);
-        return null;
-      }
-    }
-    bucket.push(new HashItem(key, value));
+    bucket.add(key, value);
   };
 
   Storage.prototype.get = function(index, key) {
     var bucket = storage[index];
-    for (var i = 0; i < bucket.length; i++) {
-      if (bucket[i].key() === key) {
-        return bucket[i].value();
-      }
-    }
-    return undefined;
+    return bucket.get(key);
+  };
+
+  Storage.prototype.remove = function(index, key) {
+    var newBucket = [];
+    storage[index].remove(key);
   };
 
   Storage.prototype.capacity = function() {
     return numBucketsUsed / size;
+  };
+
+  Storage.prototype.each = function(func) {
+    for (var i = 0; i < storage.length; i++) {
+      for (var j = 0; j < storage[i].length; j++) {
+        func(storage[i][j].key(), storage[i][j].value());
+      }
+    }
   };
 
   return new Storage();

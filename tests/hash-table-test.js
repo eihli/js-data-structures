@@ -15,9 +15,6 @@ describe('Hash Table', function() {
     });
   });
 
-  describe('add', function() {
-  });
-
   describe('get', function() {
     it('should return undefined if key is not in hash', function() {
       expect(myHash.get('eric')).to.equal(undefined);
@@ -34,7 +31,6 @@ describe('Hash Table', function() {
     before(function() {
       myHash = new HashTable();
       myHash.add('eric', 'engineer');
-      expect(myHash.size()).to.equal(1);
       expect(myHash.get('eric')).to.equal('engineer');
       myHash.remove('eric');
     });
@@ -42,19 +38,15 @@ describe('Hash Table', function() {
     it('should remove key value pair from hash', function() {
       expect(myHash.get('eric')).to.equal(undefined);
     });
-
-    it('should decrease size', function() {
-      expect(myHash.size()).to.equal(0);
-    });
   });
 
-  xdescribe('resizing', function() {
-    xit('should resize when >= 3/4 of the buckets are used', function() {
-      var myHash = new HashTable(4);
-      var resizeSpy = sinon.spy(myHash, 'resize');
-      myHash.capacity = sinon.stub().returns(0.75);
+  describe('resizing', function() {
+    it('should resize when >= 3/4 of the buckets are used', function() {
+      var myHash = new HashTable(1);
+      expect(myHash.size()).to.equal(1);
       myHash.add('eric', 'engineer');
-      expect(resizeSpy.called).to.equal(true);
+      myHash.add('zach', 'engineer');
+      expect(myHash.size()).to.equal(2);
     });
   });
 });

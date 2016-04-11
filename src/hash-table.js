@@ -11,16 +11,15 @@ module.exports = function(size) {
 
   HashTable.prototype.add = function(key, value) {
     handleResizing();
-    // console.log(storage, key, size);
     var index = hash(key, size);
     storage.add(index, key, value);
   };
 
   function handleResizing() {
     if(shouldDouble()) {
-      console.log("Doubling");
+      double();
     } else if (shouldHalve()) {
-      console.log("Halving");
+      halve();
     }
   }
 
@@ -28,28 +27,24 @@ module.exports = function(size) {
     return storage.capacity() > 0.75;
   }
 
+  function double() {
+    newStorage = new HashStorage(size * 2);
+    storage.each(function(key, val) {
+      newStorage.add(hash(key, newStorage.size(), key, val));
+    });
+    storage = newStorage;
+  }
+
   function shouldHalve() {
-    return storage.capacity() < 0.25;
+    return storage.capacity() < 0.25 && size > 1;
+  }
+
+  function halve() {
+    console.log("Halving");
   }
 
   HashTable.prototype.remove = function(key) {
-    var indexOfBucket = hash(key, this.size());
-    var oldBucket = this._storage[indexOfBucket] || [];
-    var newBucket = [];
-    var removed = false;
-    for (var i = 0; i < oldBucket.length; i++) {
-      if (oldBucket[i][0] !== key) {
-        newBucket.push(oldBucket[i]);
-      } else {
-        removed = true;
-        this._size--;
-      }
-    }
-    this._storage[indexOfBucket] = newBucket;
-    if (newBucket.length === 0) {
-      this._numUsedBuckets -= 1;
-    }
-    return removed;
+    return storage.remove(hash(key, size), key);
   };
 
   HashTable.prototype.get = function(key) {
