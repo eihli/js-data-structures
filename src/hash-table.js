@@ -1,32 +1,36 @@
-module.exports = (function() {
-  var Hash = require('./hash');
-  function HashTable(numBuckets) {
-    numBuckets = numBuckets || 2;
-    this._storage = [];
-    this._numUsedBuckets = 0;
-    this._size = 0;
-    initialize.call(this, numBuckets);
+var Hash = require('./hash');
+var HashStorage = require('./hash-storage');
+
+module.exports = function(size) {
+  var storage;
+
+  function HashTable() {
+    size = size || 2;
+    storage = new HashStorage(size);
   }
 
-  initialize = function(numBuckets) {
-    for (var i = 0; i < numBuckets; i++) {
-      this._storage.push([]);
-    }
+  HashTable.prototype.add = function(key, value) {
+    handleResizing();
+    // console.log(storage, key, size);
+    var index = hash(key, size);
+    storage.add(index, key, value);
   };
 
-  HashTable.prototype.add = function(key, value) {
-    if (this.capacity() >= 0.75) {
-      this.resize();
+  function handleResizing() {
+    if(shouldDouble()) {
+      console.log("Doubling");
+    } else if (shouldHalve()) {
+      console.log("Halving");
     }
-    var indexOfBucket = hash(key, numBuckets());
-    var bucket = this._storage[indexOfBucket] || [];
-    if (bucket.length === 0) {
-      this._numUsedBuckets += 1;
-    }
-    bucket.push([key, value]);
-    this._size++;
-    this._storage[indexOfBucket] = bucket;
-  };
+  }
+
+  function shouldDouble() {
+    return storage.capacity() > 0.75;
+  }
+
+  function shouldHalve() {
+    return storage.capacity() < 0.25;
+  }
 
   HashTable.prototype.remove = function(key) {
     var indexOfBucket = hash(key, this.size());
@@ -49,35 +53,16 @@ module.exports = (function() {
   };
 
   HashTable.prototype.get = function(key) {
-    return getValueAt.call(this, key);
-  };
-
-  numBuckets = function() {
-    return this._storage.length;
+    return storage.get(hash(key, size), key);
   };
 
   HashTable.prototype.size = function() {
-    return this._size;
+    return storage.size();
   };
-
-  HashTable.prototype.capacity = function() {
-    return 0.0 + this._numUsedBuckets / this.size();
-  };
-
-  function getValueAt(key) {
-    var indexOfBucket = hash(key, numBuckets());
-    var bucket = this._storage[indexOfBucket] || [];
-    for (var i = 0; i < bucket.length; i++) {
-      if (bucket[i][0] === key) {
-        return bucket[i][1];
-      }
-    }
-    return undefined;
-  }
 
   function hash(key, size) {
-    Hash.getIndex(key, size);
+    return Hash.getIndex(key, size);
   }
 
-  return HashTable;
-})();
+  return new HashTable();
+};
