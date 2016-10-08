@@ -41,7 +41,6 @@ module.exports = function(size) {
 
   function halve() {
     newStorage = new HashStorage(size / 2);
-    console.log(storage.size());
     storage.each(function(key, val) {
       newStorage.add(hash(key, newStorage.size(), key, val));
     });
