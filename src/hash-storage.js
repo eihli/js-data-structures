@@ -1,6 +1,6 @@
 var HashItem = require('./hash-item');
 var HashBucket = require('./hash-bucket');
-// add, get, init with size, can't push over size
+
 module.exports = function(size) {
   var storage, numBucketsUsed;
 

@@ -15,6 +15,22 @@ module.exports = function(size) {
     storage.add(index, key, value);
   };
 
+  HashTable.prototype.remove = function(key) {
+    return storage.remove(hash(key, this.size()), key);
+  };
+
+  HashTable.prototype.get = function(key) {
+    return storage.get(hash(key, this.size()), key);
+  };
+
+  HashTable.prototype.size = function() {
+    return storage.size();
+  };
+
+  function hash(key, size) {
+    return Hash.getIndex(key, size);
+  }
+
   function handleResizing() {
     if(shouldDouble()) {
       double();
@@ -45,22 +61,6 @@ module.exports = function(size) {
       newStorage.add(hash(key, newStorage.size(), key, val));
     });
     storage = newStorage;
-  }
-
-  HashTable.prototype.remove = function(key) {
-    return storage.remove(hash(key, this.size()), key);
-  };
-
-  HashTable.prototype.get = function(key) {
-    return storage.get(hash(key, this.size()), key);
-  };
-
-  HashTable.prototype.size = function() {
-    return storage.size();
-  };
-
-  function hash(key, size) {
-    return Hash.getIndex(key, size);
   }
 
   return new HashTable();
