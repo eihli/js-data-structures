@@ -2,10 +2,10 @@ var Hash = require('./hash');
 var HashStorage = require('./hash-storage');
 
 module.exports = function(size) {
+  size = size || 2;
   var storage;
 
   function HashTable() {
-    size = size || 2;
     storage = new HashStorage(size);
   }
 
