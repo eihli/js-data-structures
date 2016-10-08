@@ -11,7 +11,7 @@ module.exports = function(size) {
 
   HashTable.prototype.add = function(key, value) {
     handleResizing();
-    var index = hash(key, size);
+    var index = hash(key, this.size());
     storage.add(index, key, value);
   };
 
@@ -24,11 +24,11 @@ module.exports = function(size) {
   }
 
   function shouldDouble() {
-    return storage.capacity() > 0.75;
+    return storage.capacity() >= 0.75;
   }
 
   function double() {
-    newStorage = new HashStorage(size * 2);
+    newStorage = new HashStorage(storage.size() * 2);
     storage.each(function(key, val) {
       newStorage.add(hash(key, newStorage.size(), key, val));
     });
@@ -36,19 +36,24 @@ module.exports = function(size) {
   }
 
   function shouldHalve() {
-    return storage.capacity() < 0.25 && size > 1;
+    return storage.capacity() <= 0.25 && storage.size() > 1;
   }
 
   function halve() {
-    console.log("Halving");
+    newStorage = new HashStorage(size / 2);
+    console.log(storage.size());
+    storage.each(function(key, val) {
+      newStorage.add(hash(key, newStorage.size(), key, val));
+    });
+    storage = newStorage;
   }
 
   HashTable.prototype.remove = function(key) {
-    return storage.remove(hash(key, size), key);
+    return storage.remove(hash(key, this.size()), key);
   };
 
   HashTable.prototype.get = function(key) {
-    return storage.get(hash(key, size), key);
+    return storage.get(hash(key, this.size()), key);
   };
 
   HashTable.prototype.size = function() {

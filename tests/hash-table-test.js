@@ -48,5 +48,12 @@ describe('Hash Table', function() {
       myHash.add('zach', 'engineer');
       expect(myHash.size()).to.equal(2);
     });
+
+    it('should resize when <= 1/4 of the buckets are used', function() {
+      var myHash = new HashTable(4);
+      expect(myHash.size()).to.equal(4);
+      myHash.add('eric', 'engineer');
+      expect(myHash.size()).to.equal(2);
+    });
   });
 });
