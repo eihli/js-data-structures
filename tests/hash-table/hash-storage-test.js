@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var HashStorage = require('../src/hash-storage');
+var HashStorage = require('../../src/hash-table/hash-storage');
 
 describe('HashStorage', function() {
   var storage;

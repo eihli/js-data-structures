@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var HashTable = require('../src/hash-table.js');
+var HashTable = require('../../src/hash-table/hash-table.js');
 
 describe('Hash Table', function() {
   beforeEach(function() {

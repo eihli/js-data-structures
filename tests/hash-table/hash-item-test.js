@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var HashItem = require('../src/hash-item');
+var HashItem = require('../../src/hash-table/hash-item');
 
 describe('hash item', function() {
   describe('initialize', function() {

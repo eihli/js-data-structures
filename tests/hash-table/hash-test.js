@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Hash = require('../src/hash.js');
+var Hash = require('../../src/hash-table/hash.js');
 
 describe('hash', function() {
   it('should generate numbers between 0 and size', function() {

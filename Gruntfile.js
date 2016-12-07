@@ -6,7 +6,7 @@ module.exports = function (grunt) {
 
     jshint: {
       // This is the list of files on which grunt will run JSHint
-      all: ['Gruntfile.js', 'package.json', 'src/*.js', 'tests/*.js', '*.js'],
+      all: ['Gruntfile.js', 'package.json', 'src/**/*.js', 'tests/**/*.js', '*.js'],
       options: {
         curly: true,
         eqeqeq: true,
@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 
     watch: {
       // These are the files that grunt will watch for changes.
-      files: ['Gruntfile.js', 'package.json', 'tests/*.js', 'src/*.js'],
+      files: ['Gruntfile.js', 'package.json', 'tests/**/*.js', 'src/**/*.js'],
       // These are the tasks that are run on each of the above files every time there is a change.
       tasks: ['jshint', 'mochaTest'],
       options: {
@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     },
 
     mochaTest: {
-      src: ['tests/*.js']
+      src: ['tests/**/*.js']
     }
   });
 
